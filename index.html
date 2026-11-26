@@ -1,0 +1,846 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts (Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!-- FontAwesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%236366f1'/%3E%3Crect x='20' y='16' width='24' height='32' rx='4' fill='none' stroke='white' stroke-width='4'/%3E%3Cline x1='15' y1='24' x2='20' y2='24' stroke='white' stroke-width='4'/%3E%3Cline x1='15' y1='32' x2='20' y2='32' stroke='white' stroke-width='4'/%3E%3Cline x1='15' y1='40' x2='20' y2='40' stroke='white' stroke-width='4'/%3E%3C/svg%3E"
+    />
+
+    <title>ContactHub - Smart Contact Manager</title>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-light app-navbar sticky-top py-3">
+      <div
+        class="container-fluid px-3 px-md-5 d-flex justify-content-between align-items-center flex-nowrap gap-2"
+      >
+        <a
+          class="navbar-brand d-flex align-items-center gap-2 gap-sm-3 m-0"
+          href="#"
+        >
+          <div
+            class="brand-box d-flex align-items-center justify-content-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"
+              ></path>
+              <circle cx="12" cy="10" r="2"></circle>
+              <path d="M9 15a3 3 0 0 1 6 0"></path>
+            </svg>
+          </div>
+          <div>
+            <h1 class="brand-title mb-0">
+              Contact<span class="brand-accent">Hub</span>
+            </h1>
+            <small class="brand-subtitle d-block">Smart Contact Manager</small>
+          </div>
+        </a>
+
+        <div class="d-flex align-items-center gap-2 gap-sm-3 flex-nowrap">
+          <button
+            type="button"
+            class="btn btn-add-contact d-inline-flex align-items-center gap-2"
+            data-bs-toggle="modal"
+            data-bs-target="#contactModal"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Add Contact</span>
+          </button>
+
+          <button
+            type="button"
+            class="nav-icon-btn d-none d-sm-inline-flex"
+            title="Notifications"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            class="nav-icon-btn d-none d-sm-inline-flex"
+            title="Settings"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="3"></circle>
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+              ></path>
+            </svg>
+          </button>
+
+          <img src="./avatar-3.jpg" alt="Profile" class="profile-avatar" />
+        </div>
+      </div>
+    </nav>
+
+    <!-- Stats Section -->
+    <section class="py-4">
+      <div class="container-fluid px-3 px-md-5">
+        <div class="row g-3">
+          <div class="col-6 col-lg-4">
+            <div class="stat-card d-flex align-items-center gap-3">
+              <div class="stat-icon stat-icon-total">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="stat-label">TOTAL</div>
+                <div id="totalCount" class="stat-value">0</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-lg-4">
+            <div class="stat-card d-flex align-items-center gap-3">
+              <div class="stat-icon stat-icon-fav">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  ></polygon>
+                </svg>
+              </div>
+              <div>
+                <div class="stat-label">FAVORITES</div>
+                <div id="favCount" class="stat-value">0</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-lg-4">
+            <div class="stat-card d-flex align-items-center gap-3">
+              <div class="stat-icon stat-icon-emergency">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="stat-label">EMERGENCY</div>
+                <div id="emergencyCount" class="stat-value">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="pb-5">
+      <div class="container-fluid px-3 px-md-5">
+        <div class="row g-4">
+          <div class="col-12 col-lg-8">
+            <div class="mb-3">
+              <h2 class="section-heading mb-1">All Contacts</h2>
+              <p class="section-subtitle mb-0">
+                Manage and organize your
+                <span id="contactsSubtitleCount">0</span> contacts
+              </p>
+            </div>
+
+            <div class="search-wrapper position-relative mb-4">
+              <span class="search-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
+              <input
+                type="search"
+                id="searchInput"
+                class="form-control search-input"
+                placeholder="Search by name, phone, or email..."
+                aria-label="Search contacts"
+              />
+            </div>
+
+            <div id="contactsContainer">
+              <div id="emptyStateBox" class="empty-state-box text-center py-5">
+                <div class="empty-state-icon mx-auto mb-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"
+                    ></path>
+                    <circle cx="12" cy="10" r="2"></circle>
+                    <path d="M9 15a3 3 0 0 1 6 0"></path>
+                  </svg>
+                </div>
+                <h3 id="emptyStateTitle" class="empty-title mb-1">
+                  No contacts found
+                </h3>
+                <p id="emptyStateSubtitle" class="empty-subtitle mb-0">
+                  Click "Add Contact" to get started
+                </p>
+              </div>
+
+              <div id="contactsCardsList" class="row g-3 d-none"></div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4">
+            <div class="d-flex flex-column gap-4">
+              <div class="side-panel">
+                <div
+                  class="side-panel-header side-header-fav d-flex align-items-center gap-3"
+                >
+                  <div class="side-icon side-icon-fav">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polygon
+                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                      ></polygon>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="side-title mb-0">Favorites</h3>
+                    <p class="side-subtitle mb-0">Quick access</p>
+                  </div>
+                </div>
+
+                <div
+                  id="favoritesList"
+                  class="side-panel-body side-empty-text text-center"
+                >
+                  No favorites yet
+                </div>
+              </div>
+
+              <div class="side-panel">
+                <div
+                  class="side-panel-header side-header-emergency d-flex align-items-center gap-3"
+                >
+                  <div class="side-icon side-icon-emergency">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="side-title mb-0">Emergency</h3>
+                    <p class="side-subtitle mb-0">Urgent contacts</p>
+                  </div>
+                </div>
+
+                <div
+                  id="emergencyList"
+                  class="side-panel-body side-empty-text text-center"
+                >
+                  No emergency contacts
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div
+      class="modal fade"
+      id="contactModal"
+      tabindex="-1"
+      aria-labelledby="contactModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content contact-modal-content">
+          <div class="modal-header contact-modal-header">
+            <h5 class="modal-title contact-modal-title" id="contactModalLabel">
+              Add New Contact
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <form id="contactForm" novalidate>
+            <div class="modal-body contact-modal-body">
+              <input type="hidden" id="contactId" />
+
+              <div class="d-flex flex-column align-items-center mb-4">
+                <div class="contact-avatar-preview mb-2" id="avatarPreviewBox">
+                  <img
+                    id="avatarPreviewImg"
+                    src=""
+                    alt="Contact Avatar"
+                    class="contact-avatar-img d-none"
+                  />
+                  <span id="avatarDefaultIcon" class="contact-avatar-default">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+
+                <input
+                  type="file"
+                  id="contactPhotoInput"
+                  accept="image/*"
+                  class="d-none"
+                />
+                <button
+                  type="button"
+                  id="changePhotoBtn"
+                  class="btn btn-change-photo d-inline-flex align-items-center gap-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                    ></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                  </svg>
+                  <span>Change Photo</span>
+                </button>
+              </div>
+
+              <div class="mb-3">
+                <label for="contactName" class="form-label contact-label">
+                  Full Name <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control contact-input"
+                  id="contactName"
+                  placeholder="Enter full name"
+                  required
+                />
+                <div class="invalid-feedback" id="nameError">
+                  Please enter a full name.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="contactPhone" class="form-label contact-label">
+                  Phone Number <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="tel"
+                  class="form-control contact-input"
+                  id="contactPhone"
+                  placeholder="e.g., 01012345678"
+                  required
+                />
+                <div class="invalid-feedback" id="phoneError">
+                  Please enter a valid phone number.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="contactEmail" class="form-label contact-label">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  class="form-control contact-input"
+                  id="contactEmail"
+                  placeholder="name@example.com"
+                />
+                <div class="invalid-feedback" id="emailError">
+                  Please enter a valid email address.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="contactAddress" class="form-label contact-label">
+                  Address
+                </label>
+                <input
+                  type="text"
+                  class="form-control contact-input"
+                  id="contactAddress"
+                  placeholder="Enter address"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="contactGroup" class="form-label contact-label">
+                  Group
+                </label>
+                <select class="form-select contact-input" id="contactGroup">
+                  <option value="" selected>Select a group</option>
+                  <option value="Family">Family</option>
+                  <option value="Friends">Friends</option>
+                  <option value="Work">Work</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="contactNotes" class="form-label contact-label">
+                  Notes
+                </label>
+                <textarea
+                  class="form-control contact-input contact-textarea"
+                  id="contactNotes"
+                  rows="2"
+                  placeholder="Add notes about this contact"
+                ></textarea>
+              </div>
+
+              <div class="d-flex flex-wrap align-items-center gap-4 pt-1 mb-2">
+                <label
+                  class="d-inline-flex align-items-center gap-2 contact-check-label m-0"
+                  for="isFavorite"
+                >
+                  <input
+                    class="form-check-input m-0 contact-checkbox"
+                    type="checkbox"
+                    id="isFavorite"
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="#f59e0b"
+                    stroke="#f59e0b"
+                    stroke-width="1.5"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <span>Favorite</span>
+                </label>
+
+                <label
+                  class="d-inline-flex align-items-center gap-2 contact-check-label m-0"
+                  for="isEmergency"
+                >
+                  <input
+                    class="form-check-input m-0 contact-checkbox"
+                    type="checkbox"
+                    id="isEmergency"
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ec4899"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                    ></path>
+                    <path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"></path>
+                  </svg>
+                  <span>Emergency</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="modal-footer contact-modal-footer">
+              <button
+                type="button"
+                class="btn btn-cancel-modal"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="btn btn-save-modal d-inline-flex align-items-center justify-content-center gap-2"
+                id="saveContactBtn"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Save Contact</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <template id="contactCardTemplate">
+      <div class="col-12 col-md-6">
+        <div
+          class="contact-item-card h-100 d-flex flex-column justify-content-between"
+        >
+          <div class="contact-card-top">
+            <div class="d-flex align-items-center gap-3">
+              <div class="contact-card-avatar">
+                <img class="card-avatar-img d-none" src="" alt="" />
+                <span class="card-avatar-letter"></span>
+              </div>
+              <div class="min-w-0 flex-grow-1">
+                <h4 class="card-contact-name text-truncate mb-1"></h4>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="mini-info-icon mini-phone-icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                      />
+                    </svg>
+                  </span>
+                  <span class="card-contact-phone text-truncate"></span>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="card-email-row d-flex align-items-center gap-2 mt-3 d-none"
+            >
+              <span class="mini-info-icon mini-email-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"
+                  />
+                </svg>
+              </span>
+              <span class="card-contact-email text-truncate"></span>
+            </div>
+
+            <div
+              class="card-address-row d-flex align-items-center gap-2 mt-2 d-none"
+            >
+              <span class="mini-info-icon mini-address-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                  />
+                </svg>
+              </span>
+              <span class="card-contact-address text-truncate"></span>
+            </div>
+
+            <div class="card-badges-row d-flex flex-wrap gap-1 mt-2">
+              <span class="badge card-group-badge d-none"></span>
+            </div>
+          </div>
+
+          <div
+            class="contact-card-bottom d-flex justify-content-between align-items-center"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <a class="card-action-btn action-call-btn" href="#" title="Call">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                  />
+                </svg>
+              </a>
+              <a class="card-action-btn action-mail-btn" href="#" title="Email">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"
+                  />
+                </svg>
+              </a>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+              <button
+                type="button"
+                class="card-action-btn action-fav-btn"
+                title="Favorite"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  ></polygon>
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="card-action-btn action-emerg-btn"
+                title="Emergency"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                  ></path>
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="card-action-btn action-edit-btn"
+                title="Edit"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+                  ></path>
+                  <path
+                    d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
+                  ></path>
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="card-action-btn action-delete-btn"
+                title="Delete"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path
+                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
